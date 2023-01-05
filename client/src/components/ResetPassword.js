@@ -8,7 +8,7 @@ export const ResetPassword = () => {
     const [error, setError] = useState();
     const param = useParams();
     const history = useHistory();
-    const url = `http://localhost:5000/user/password-reset/${param.id}`
+    const url = `https://wlone.onrender.com/user/password-reset/${param.id}`
 
     useEffect(() => {
         const verifyURL = async () => {

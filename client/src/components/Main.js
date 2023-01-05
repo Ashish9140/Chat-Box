@@ -139,34 +139,6 @@ const Main = ({ socket }) => {
                         </div>
 
                         <div className="messageArea">
-                            {/* <ul className='chat'>
-                                {
-                                    messageList.map((message, index) => {
-                                        return (
-                                            (message.sender.email !== user.email) ?
-                                                <li className="other">
-                                                    <div className="avatar">
-                                                        <img src={rightTop.avatar ? `http://localhost:5000/${rightTop.avatar}` : '/images/ppp3.jpg'} draggable="false" />
-                                                    </div>
-                                                    <div className="msg">
-                                                        <p>{message.message}</p>
-                                                        <time>{message.time}</time>
-                                                    </div>
-                                                </li>
-                                                :
-                                                <li className="self">
-                                                    <div className="avatar">
-                                                        <img src={user.avatar ? `http://localhost:5000/${user.avatar}` : '/images/ppp3.jpg'} draggable="false" />
-                                                    </div>
-                                                    <div className="msg">
-                                                        <p>{message.message}</p>
-                                                        <time>{message.time}</time>
-                                                    </div>
-                                                </li>
-                                        )
-                                    })
-                                }
-                            </ul> */}
 
                             <MessageBody />
                             {showPicker ?

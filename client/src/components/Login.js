@@ -9,7 +9,7 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState();
     const history = useHistory();
-    const { setUser } = useContext(CartContext);
+    const { setUser, setShowChat } = useContext(CartContext);
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -17,6 +17,7 @@ const Login = () => {
             const { data } = await loginUser({ email, password });
             localStorage.setItem("token", JSON.stringify(data.token));
             setUser(data.user);
+            setShowChat(false);
             history.push("/chatbox");
         } catch (error) {
             if (error.response &&

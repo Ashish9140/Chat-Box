@@ -9,7 +9,7 @@ const Register = () => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState();
     const history = useHistory();
-    const { setUser } = useContext(CartContext);
+    const { setUser, setShowChat } = useContext(CartContext);
 
 
     async function handleSignUp(e) {
@@ -18,6 +18,7 @@ const Register = () => {
             const { data } = await signUpUser({ email, name, password });
             localStorage.setItem("token", JSON.stringify(data.token));
             setUser(data.user);
+            setShowChat(false);
             history.push("/chatbox");
         } catch (error) {
             if (error.response &&
