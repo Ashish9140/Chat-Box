@@ -36,7 +36,7 @@ const ProfileModal = () => {
                     </div>
                     <div className="modal-body">
                         <div className="profile-img">
-                            <img src={!file ? `${process.env.BASE_URL}/${user.avatar}` : file} alt="logo" />
+                            <img src={!file ? `${BASE_URL}/${user.avatar}` : file} alt="logo" />
                             <input type="file" className="file" onChange={(e) => { handleChange(e) }} />
                         </div>
                         <div className="profile-info">
