@@ -29,6 +29,11 @@
     background: #555;
 }
 
+/* .chatCotaniner {
+    padding-bottom: 100px;
+    height: 90vh;
+} */
+
 
 .sidebar {
     position: fixed;
@@ -152,7 +157,7 @@
 }
 
 .messageArea {
-    height: calc(100vh - 120px);
+    height: calc(100vh - 160px);
     background-color: #e5e5e5;
 }
 
@@ -232,7 +237,7 @@
 }
 
 /* Message Area */
-
+/* 
 .message-container {
     width: 100%;
     height: 100%;
@@ -242,7 +247,7 @@
 
 .message-container::-webkit-scrollbar {
     display: none;
-}
+} */
 
 .messageArea {
     overflow-y: auto;
