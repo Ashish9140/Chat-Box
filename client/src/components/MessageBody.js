@@ -3,7 +3,7 @@ import { CartContext } from '../CartContext';
 import ScrollToBottom from "react-scroll-to-bottom";
 
 const MessageBody = () => {
-    const { messageList, user, rightTop } = useContext(CartContext);
+    const { messageList, user, rightTop, BASE_URL } = useContext(CartContext);
 
     return (
         <ScrollToBottom className='message-container'>
@@ -83,7 +83,7 @@ const MessageBody = () => {
                                         (message.message.match(/\.(jpeg|jpg|gif|png|PNG)$/) === null) ?
                                             <>
                                                 <div className="avatar">
-                                                    <img src={rightTop.avatar ? `http://localhost:5000/${rightTop.avatar}` : '/images/ppp3.jpg'} draggable="false" />
+                                                    <img src={rightTop.avatar ? `${BASE_URL}/${rightTop.avatar}` : '/images/ppp3.jpg'} draggable="false" />
                                                 </div>
                                                 <div className="msg">
                                                     <p>{message.message}</p>
@@ -93,11 +93,11 @@ const MessageBody = () => {
                                             :
                                             <>
                                                 <div className="avatar">
-                                                    <img src={rightTop.avatar ? `http://localhost:5000/${rightTop.avatar}` : '/images/ppp3.jpg'} draggable="false" />
+                                                    <img src={rightTop.avatar ? `${BASE_URL}/${rightTop.avatar}` : '/images/ppp3.jpg'} draggable="false" />
                                                 </div>
                                                 <div className="msg">
-                                                    <a href={`http://localhost:5000/${message.message}`} target="_blank">
-                                                        <img src={`http://localhost:5000/${message.message}`} alt="images" style={{ borderRadius: "5px" }} />
+                                                    <a href={`${BASE_URL}/${message.message}`} target="_blank">
+                                                        <img src={`${BASE_URL}/${message.message}`} alt="images" style={{ borderRadius: "5px" }} />
                                                     </a>
                                                 </div>
                                             </>
@@ -112,7 +112,7 @@ const MessageBody = () => {
                                         (message.message.match(/\.(jpeg|jpg|gif|png|PNG)$/) === null) ?
                                             <>
                                                 <div className="avatar">
-                                                    <img src={user.avatar ? `http://localhost:5000/${user.avatar}` : '/images/ppp3.jpg'} draggable="false" />
+                                                    <img src={user.avatar ? `${BASE_URL}/${user.avatar}` : '/images/ppp3.jpg'} draggable="false" />
                                                 </div>
                                                 <div className="msg">
                                                     <p>{message.message}</p>
@@ -122,11 +122,11 @@ const MessageBody = () => {
                                             :
                                             <>
                                                 <div className="avatar">
-                                                    <img src={user.avatar ? `http://localhost:5000/${user.avatar}` : '/images/ppp3.jpg'} draggable="false" />
+                                                    <img src={user.avatar ? `${BASE_URL}/${user.avatar}` : '/images/ppp3.jpg'} draggable="false" />
                                                 </div>
                                                 <div className="msg">
-                                                    <a href={`http://localhost:5000/${message.message}`} target="_blank">
-                                                        <img src={`http://localhost:5000/${message.message}`} alt="images" style={{ borderRadius: "5px" }} />
+                                                    <a href={`${BASE_URL}/${message.message}`} target="_blank">
+                                                        <img src={`${BASE_URL}/${message.message}`} alt="images" style={{ borderRadius: "5px" }} />
                                                     </a>
                                                 </div>
                                             </>

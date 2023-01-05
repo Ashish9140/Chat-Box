@@ -12,6 +12,7 @@ export const App = () => {
 
   const [showChat, setShowChat] = useState(false);
   const [room, setRoom] = useState('');
+  const BASE_URL = 'http://localhost:5000';
   const [rightTop, setRightTop] = useState({
     _id: "dfd",
     name: 'room Name',
@@ -39,7 +40,7 @@ export const App = () => {
 
 
   return (
-    <CartContext.Provider value={{ showChat, setShowChat, messageList, setMessageList, allUser, setAllUser, setRoom, room, user, setUser, rightTop, setRightTop }}>
+    <CartContext.Provider value={{ showChat, setShowChat, messageList, setMessageList, allUser, setAllUser, setRoom, room, user, setUser, rightTop, setRightTop, BASE_URL }}>
       <Router>
         <Switch>
 

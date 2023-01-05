@@ -7,7 +7,7 @@ import Picker from 'emoji-picker-react'
 
 const Main = ({ socket }) => {
 
-    const { user, rightTop, setMessageList, showChat } = useContext(CartContext);
+    const { user, rightTop, setMessageList, showChat, BASE_URL } = useContext(CartContext);
     const [value, setValue] = useState('');
     const [showPicker, setShowPicker] = useState(false);
 
@@ -43,7 +43,7 @@ const Main = ({ socket }) => {
         const formData = new FormData();
         formData.append("avatar", files[0]);
         try {
-            const res = await axios.post("http://localhost:5000/upload/file", formData)
+            const res = await axios.post(`${BASE_URL}/upload/file`, formData)
             // console.log(res.data.url);
             let roomId = user.email + rightTop.email;
             roomId = roomId.split('').sort().join('')
@@ -130,7 +130,7 @@ const Main = ({ socket }) => {
                     <div>
                         <div className="mainTop border-1">
                             <div>
-                                <img src={rightTop.avatar ? `http://localhost:5000/${rightTop.avatar}` : '/images/ppp3.jpg'} alt="logo" />
+                                <img src={rightTop.avatar ? `${BASE_URL}/${rightTop.avatar}` : '/images/ppp3.jpg'} alt="logo" />
                                 <span>{rightTop.name}</span>
                             </div>
                             <div className="mainTopBack" onClick={handleClose}>

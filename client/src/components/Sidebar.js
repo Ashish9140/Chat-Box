@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { CartContext } from '../CartContext';
 
 const Sidebar = ({ socket }) => {
-    const { user, setUser, allUser, setAllUser, setRightTop, setMessageList, setShowChat } = useContext(CartContext);
+    const { user, setUser, allUser, setAllUser, setRightTop, setMessageList, setShowChat, BASE_URL } = useContext(CartContext);
     const history = useHistory();
 
     useEffect(() => {
@@ -61,7 +61,7 @@ const Sidebar = ({ socket }) => {
         <div className="sidebar">
             <div className="sidebarTop">
                 <div className="sidebarTopImg">
-                    <img src={user.avatar ? `http://localhost:5000/${user.avatar}` : '/images/ppp3.jpg'} alt="logo" />
+                    <img src={user.avatar ? `${BASE_URL}/${user.avatar}` : '/images/ppp3.jpg'} alt="logo" />
                     <span>{user.name}</span>
                 </div>
                 <div className="topMenu btn-group">
@@ -85,7 +85,7 @@ const Sidebar = ({ socket }) => {
                             return (
                                 (Navuser.email !== user.email) ?
                                     <div className="list-group-item list-group-item-action px-3 border-1" onClick={() => { handleOpen(Navuser) }} key={index}>
-                                        <img src={Navuser.avatar ? `http://localhost:5000/${Navuser.avatar}` : '/images/ppp3.jpg'} alt="logo" />
+                                        <img src={Navuser.avatar ? `${BASE_URL}/${Navuser.avatar}` : '/images/ppp3.jpg'} alt="logo" />
                                         <span>{Navuser.name}</span>
                                     </div>
                                     : ''

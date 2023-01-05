@@ -3,7 +3,7 @@ import { CartContext } from '../../CartContext'
 import axios from "axios";
 
 const ProfileModal = () => {
-    const { user } = useContext(CartContext);
+    const { user, BASE_URL } = useContext(CartContext);
     const [file, setFile] = useState();
     const [upload, setUpload] = useState();
 
@@ -12,7 +12,7 @@ const ProfileModal = () => {
         formData.append("avatar", upload);
         formData.append("_id", user._id);
         try {
-            const res = await axios.post("http://localhost:5000/upload/file", formData)
+            const res = await axios.post(`${BASE_URL}/upload/file`, formData)
             console.log(res);
         } catch (error) {
             console.log(error)
@@ -36,7 +36,7 @@ const ProfileModal = () => {
                     </div>
                     <div className="modal-body">
                         <div className="profile-img">
-                            <img src={!file ? `http://localhost:5000/${user.avatar}` : file} alt="logo" />
+                            <img src={!file ? `${process.env.BASE_URL}/${user.avatar}` : file} alt="logo" />
                             <input type="file" className="file" onChange={(e) => { handleChange(e) }} />
                         </div>
                         <div className="profile-info">
