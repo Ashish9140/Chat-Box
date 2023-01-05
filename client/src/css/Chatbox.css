@@ -157,7 +157,7 @@
 }
 
 .messageArea {
-    height: calc(100vh - 160px);
+    height: calc(100vh - 120px);
     background-color: #e5e5e5;
 }
 
@@ -388,6 +388,10 @@
 @media screen and (max-width: 550px) {
     .msg img {
         width: 200px;
+    }
+
+    .messageArea {
+        height: calc(100vh - 175px);
     }
 }
 
