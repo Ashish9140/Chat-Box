@@ -44,7 +44,7 @@ const Main = ({ socket }) => {
         formData.append("avatar", files[0]);
         try {
             const res = await axios.post(`${BASE_URL}/upload/file`, formData)
-            // console.log(res.data.url);
+            console.log(res.data.url);
             let roomId = user.email + rightTop.email;
             roomId = roomId.split('').sort().join('')
             let messageData = {

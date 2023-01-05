@@ -237,7 +237,7 @@
 }
 
 /* Message Area */
-/* 
+
 .message-container {
     width: 100%;
     height: 100%;
@@ -247,7 +247,7 @@
 
 .message-container::-webkit-scrollbar {
     display: none;
-} */
+}
 
 .messageArea {
     overflow-y: auto;
