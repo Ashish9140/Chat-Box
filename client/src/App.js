@@ -7,12 +7,14 @@ import { refreshUser } from "./http";
 import ForgetPassword from "./components/ForgetPassword";
 import { ResetPassword } from "./components/ResetPassword";
 import Notfound from "./components/Notfound";
+import VideoCall from './components/VideoCall'
 
 export const App = () => {
 
   const [showChat, setShowChat] = useState(false);
+  const [loader, setLoader] = useState(false);
   const [room, setRoom] = useState('');
-  const BASE_URL = 'https://wlone.onrender.com';
+  const BASE_URL = 'https://stchrom.tgb.software';
   const [rightTop, setRightTop] = useState({
     _id: "dfd",
     name: 'room Name',
@@ -40,22 +42,28 @@ export const App = () => {
 
 
   return (
-    <CartContext.Provider value={{ showChat, setShowChat, messageList, setMessageList, allUser, setAllUser, setRoom, room, user, setUser, rightTop, setRightTop, BASE_URL }}>
+    <CartContext.Provider value={
+      {
+        showChat, setShowChat, messageList,
+        setMessageList, allUser,
+        setAllUser, setRoom, room, user,
+        setUser, rightTop, setRightTop, BASE_URL,
+        loader, setLoader
+      }}>
       <Router>
         <Switch>
-
-          <Route exact path="/">
-            {user ? <Redirect to="/chatbox" /> : <AuthPage />}
-          </Route>
-
-          <Route exact path="/chatbox">
-            {!user ? <Redirect to="/" /> : <Chatbox />}
-          </Route>
-
+          <Route exact path="/" render={() => (
+            user ? <Redirect to="/chatbox" /> : <AuthPage />
+          )} />
+          <Route exact path="/chatbox" render={() => (
+            user ? <Chatbox /> : <Redirect to="/" />
+          )} />
+          <Route exact path="/chatbox/video" render={() => (
+            user ? <VideoCall /> : <Redirect to="/" />
+          )} />
           <Route exact path="/forget-password" component={ForgetPassword} />
           <Route exact path="/user/password-reset/:id" component={ResetPassword} />
           <Route path="*" component={Notfound} />
-
         </Switch>
       </Router>
     </CartContext.Provider>

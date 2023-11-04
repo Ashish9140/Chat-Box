@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: 'https://wlone.onrender.com',
+    baseURL: 'https://stchrom.tgb.software',
     withCredentials: false,
     headers: {
         'Content-Type': 'application/json',

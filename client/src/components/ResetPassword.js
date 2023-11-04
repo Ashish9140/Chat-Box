@@ -1,14 +1,16 @@
 import axios from 'axios';
-import React, { useState, useEffect, Fragment } from 'react'
+import React, { useState, useEffect, Fragment, useContext } from 'react'
 import { useParams, useHistory } from 'react-router-dom';
+import { CartContext } from '../CartContext';
 
 export const ResetPassword = () => {
     const [password, setPassword] = useState('');
+    const { BASE_URl } = useContext(CartContext);
     const [validURL, setValidURL] = useState(false);
     const [error, setError] = useState();
     const param = useParams();
     const history = useHistory();
-    const url = `https://wlone.onrender.com/user/password-reset/${param.id}`
+    const url = `${BASE_URl}/user/password-reset/${param.id}`
 
     useEffect(() => {
         const verifyURL = async () => {

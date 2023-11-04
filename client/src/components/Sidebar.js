@@ -1,10 +1,11 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { getUsers, getChats } from '../http';
 import { useHistory } from 'react-router-dom';
 import { CartContext } from '../CartContext';
 
 const Sidebar = ({ socket }) => {
-    const { user, setUser, allUser, setAllUser, setRightTop, setMessageList, setShowChat, BASE_URL } = useContext(CartContext);
+    const [searchQuery, setSearchQuery] = useState('');
+    const { user, setUser, allUser, setAllUser, setRightTop, setMessageList, setShowChat, BASE_URL, setLoader } = useContext(CartContext);
     const history = useHistory();
 
     useEffect(() => {
@@ -26,6 +27,7 @@ const Sidebar = ({ socket }) => {
     }
 
     const handleOpen = async (Navuser) => {
+        setLoader(true);
         if (Navuser.avatar)
             setRightTop({
                 _id: Navuser._id,
@@ -51,9 +53,23 @@ const Sidebar = ({ socket }) => {
         const { data } = await getChats({ roomId, token });
         setMessageList(data);
         setShowChat(true);
+        setLoader(false);
         document.querySelector(".mainTopBack").classList.add("show");
         document.querySelector(".sidebar").classList.add("open");
         document.querySelector(".main").classList.add("close");
+    }
+
+    const filterUsers = () => {
+        if (!allUser) {
+            return [];
+        }
+    
+        return allUser.filter(Navuser => {
+            return (
+                Navuser.email !== user.email &&
+                (Navuser.name.toLowerCase().includes(searchQuery.toLowerCase()) || searchQuery === '')
+            );
+        });
     }
 
 
@@ -75,24 +91,26 @@ const Sidebar = ({ socket }) => {
                 </div>
             </div>
             <div className="sidebarSearch">
-                <input type="search" className="form-control" placeholder='Search for chats' />
+                <input
+                    type="search"
+                    className="form-control"
+                    placeholder="Search for chats"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                />
             </div>
             <div className="sidebarList list-group list-group-light">
 
-                {
-                    (allUser !== undefined) ?
-                        allUser.map((Navuser, index) => {
-                            return (
-                                (Navuser.email !== user.email) ?
-                                    <div className="list-group-item list-group-item-action px-3 border-1" onClick={() => { handleOpen(Navuser) }} key={index}>
-                                        <img src={Navuser.avatar ? `${BASE_URL}/${Navuser.avatar}` : '/images/ppp3.jpg'} alt="logo" />
-                                        <span>{Navuser.name}</span>
-                                    </div>
-                                    : ''
-                            )
-                        })
-                        : ''
-                }
+                {filterUsers().map((Navuser, index) => (
+                    <div
+                        className="list-group-item list-group-item-action px-3 border-1"
+                        onClick={() => handleOpen(Navuser)}
+                        key={index}
+                    >
+                        <img src={Navuser.avatar ? `${BASE_URL}/${Navuser.avatar}` : '/images/ppp3.jpg'} alt="logo" />
+                        <span>{Navuser.name}</span>
+                    </div>
+                ))}
 
             </div>
         </div>

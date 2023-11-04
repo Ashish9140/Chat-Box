@@ -4,7 +4,7 @@ import ProfileModal from '../components/modals/ProfileModal';
 import io from "socket.io-client";
 import Sidebar from '../components/Sidebar';
 import Main from '../components/Main';
-const socket = io.connect('https://wlone.onrender.com');
+const socket = io.connect('https://stchrom.tgb.software');
 
 const Chatbox = () => {
     return (
@@ -14,6 +14,8 @@ const Chatbox = () => {
             <Sidebar socket={socket} />
 
             <Main socket={socket} />
+
+            
 
         </div>
     )

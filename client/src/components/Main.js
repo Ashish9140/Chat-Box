@@ -4,10 +4,13 @@ import Dropzone from 'react-dropzone';
 import axios from "axios";
 import MessageBody from './MessageBody';
 import Picker from 'emoji-picker-react'
+import Loader from "./Loader"
+import { useHistory } from 'react-router-dom';
 
 const Main = ({ socket }) => {
+    const history = useHistory();
 
-    const { user, rightTop, setMessageList, showChat, BASE_URL } = useContext(CartContext);
+    const { user, rightTop, setMessageList, showChat, BASE_URL, loader } = useContext(CartContext);
     const [value, setValue] = useState('');
     const [showPicker, setShowPicker] = useState(false);
 
@@ -105,6 +108,13 @@ const Main = ({ socket }) => {
         }
     }
 
+
+    const handleVideoCall = async () => {
+        alert("Not Working in free hosting")
+    //   history.push("/video")
+    };
+    
+
     useEffect(() => {
         const handler = (data) => {
             setMessageList((list) => [...list, data]);
@@ -126,61 +136,68 @@ const Main = ({ socket }) => {
     return (
         <div className="main">
             {
-                (showChat) ?
-                    <div>
-                        <div className="mainTop border-1">
-                            <div>
-                                <img src={rightTop.avatar ? `${BASE_URL}/${rightTop.avatar}` : '/images/ppp3.jpg'} alt="logo" />
-                                <span>{rightTop.name}</span>
-                            </div>
-                            <div className="mainTopBack" onClick={handleClose}>
-                                <i className="fa-solid fa-circle-arrow-left"></i>
-                            </div>
-                        </div>
-
-                        <div className="messageArea">
-
-                            <MessageBody />
-                            {showPicker ?
-                                <div className="emojiReact">
-                                    <Picker onEmojiClick={onEmojiClick} />
-                                </div> : ''
-                            }
-
-                        </div>
-
-                        <div className="sendForm">
-                            <div className='emoji-picker' onClick={handlePicker} >
-                                <i className="far fa-grin fa-2x"></i>
-                            </div>
-                            <div className="inputFrom">
-                                <input type="text"
-                                    placeholder='Enter your message'
-                                    value={value}
-                                    onChange={(e) => { setValue(e.target.value) }}
-                                    onKeyDown={handleKeyDown}
-                                />
-                                <i className="fa-solid fa-paper-plane" onClick={handleButtonDown}></i>
-                            </div>
-                            <div className='select-img'>
-                                <Dropzone onDrop={onDrop}>
-                                    {({ getRootProps, getInputProps }) => (
-                                        <section>
-                                            <div {...getRootProps()}>
-                                                <input {...getInputProps()} />
-                                                <i className='fas fa-paperclip fa-2x'></i>
-                                            </div>
-                                        </section>
-                                    )}
-                                </Dropzone>
-                            </div>
-                        </div>
-                    </div>
+                loader ? <Loader />
                     :
-                    <div className="chatShow">
-                        <i className="fa-regular fa-comments"></i>
-                        <span>Select Any user or group to have chat</span>
-                    </div>
+                    ((showChat) ?
+                        <div>
+                            <div className="mainTop border-1">
+                                <div>
+                                    <img src={rightTop.avatar ? `${BASE_URL}/${rightTop.avatar}` : '/images/ppp3.jpg'} alt="logo" />
+                                    <span>{rightTop.name}</span>
+                                </div>
+                                <div className='videoCall' onClick={handleVideoCall}>
+                                    <img src='/images/videocall.png'></img>
+                                </div>
+
+                                <div className="mainTopBack">
+                                    <i className="fa-solid fa-circle-arrow-left" onClick={handleClose}></i>
+                                </div>
+                            </div>
+
+                            <div className="messageArea">
+
+                                <MessageBody />
+                                {showPicker ?
+                                    <div className="emojiReact">
+                                        <Picker onEmojiClick={onEmojiClick} />
+                                    </div> : ''
+                                }
+
+                            </div>
+
+                            <div className="sendForm">
+                                <div className='emoji-picker' onClick={handlePicker} >
+                                    <i className="far fa-grin fa-2x"></i>
+                                </div>
+                                <div className="inputFrom">
+                                    <input type="text"
+                                        placeholder='Enter your message'
+                                        value={value}
+                                        onChange={(e) => { setValue(e.target.value) }}
+                                        onKeyDown={handleKeyDown}
+                                    />
+                                    <i className="fa-solid fa-paper-plane" onClick={handleButtonDown}></i>
+                                </div>
+                                <div className='select-img'>
+                                    <Dropzone onDrop={onDrop}>
+                                        {({ getRootProps, getInputProps }) => (
+                                            <section>
+                                                <div {...getRootProps()}>
+                                                    <input {...getInputProps()} />
+                                                    <i className='fas fa-paperclip fa-2x'></i>
+                                                </div>
+                                            </section>
+                                        )}
+                                    </Dropzone>
+                                </div>
+                            </div>
+                        </div>
+                        :
+                        <div className="chatShow">
+                            <i className="fa-regular fa-comments"></i>
+                            <span>Select Any user or group to have chat</span>
+                        </div>
+                    )
             }
         </div>
     )
