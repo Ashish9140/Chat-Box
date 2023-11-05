@@ -14,7 +14,7 @@ export const App = () => {
   const [showChat, setShowChat] = useState(false);
   const [loader, setLoader] = useState(false);
   const [room, setRoom] = useState('');
-  const BASE_URL = 'https://stchrom.tgb.software';
+  const BASE_URL = 'https://wlone.onrender.com';
   const [rightTop, setRightTop] = useState({
     _id: "dfd",
     name: 'room Name',
@@ -58,7 +58,7 @@ export const App = () => {
           <Route exact path="/chatbox" render={() => (
             user ? <Chatbox /> : <Redirect to="/" />
           )} />
-          <Route exact path="/chatbox/video" render={() => (
+          <Route exact path="/video" render={() => (
             user ? <VideoCall /> : <Redirect to="/" />
           )} />
           <Route exact path="/forget-password" component={ForgetPassword} />

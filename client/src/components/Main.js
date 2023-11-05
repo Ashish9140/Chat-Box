@@ -111,9 +111,9 @@ const Main = ({ socket }) => {
 
     const handleVideoCall = async () => {
         alert("Not Working in free hosting")
-    //   history.push("/video")
+        //   history.push("/video")
     };
-    
+
 
     useEffect(() => {
         const handler = (data) => {
